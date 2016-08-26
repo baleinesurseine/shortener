@@ -16,7 +16,6 @@ urlSchema.pre('save', function (next) {
       return next(error)
     }
     doc.created_at = new Date()
-    console.log('counter: ' + counter)
     doc._id = counter.seq
     next()
   })
