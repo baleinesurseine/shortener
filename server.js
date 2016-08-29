@@ -58,6 +58,7 @@ app.post('/api/shorten', function (req, res) {
       newUrl.save(function (err) {
         if (err) {
           console.log(err)
+          return res.status(500).send({ error: 'Something failed!' })
         }
         shortUrl = config.webhost + base58.encode(newUrl._id)
         res.send({
