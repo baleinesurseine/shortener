@@ -11,7 +11,6 @@ docker run --name some-mongo -d mongo
 docker run --name some-shortener --link some-mongo:mongo -p 80:8000 -d baleinesurseine/shortener
 ```
 This image includes `expose 8000`.
-
 ### configuration options
  `-e "DB=db`: sets the database name (default is 'url_shortener')
  `-e "WEBHOST=host"`: sets the web host url (default is 'http://localhost/')
