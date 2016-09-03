@@ -1,8 +1,10 @@
 'use strict'
 var express = require('express')
+var sanitize = require('mongo-sanitize')
 var helmet = require('helmet')
 var app = express()
 app.use(helmet())
+app.use(helmet.hidePoweredBy())
 var path = require('path')
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose')
@@ -29,7 +31,7 @@ app.get('/', function (req, res) {
 
 // handle shorten POST
 app.post('/api/shorten', function (req, res) {
-  var longUrl = req.body.url
+  var longUrl = sanitize(req.body.url)
   var shortUrl = ''
 
   if (validator.isURL(longUrl) !== true) {
@@ -38,6 +40,7 @@ app.post('/api/shorten', function (req, res) {
   }
 
   // check if url already exists in database
+
   Url.findOne({long_url: longUrl}, function (err, doc) {
     if (err) {
       return res.status(500).send({ error: 'Something failed!' })
