@@ -14,7 +14,6 @@ This image includes `expose 8000`.
 ### configuration options
  `-e "DB=db`: sets the database name (default is 'url_shortener')
  `-e "WEBHOST=host"`: sets the web host url (default is 'http://localhost/')
-
 ### reset database contents
 ```
 docker exec <instance-name> node reset.js
