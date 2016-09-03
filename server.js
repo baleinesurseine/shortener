@@ -34,7 +34,7 @@ app.post('/api/shorten', function (req, res) {
   var longUrl = sanitize(req.body.url)
   var shortUrl = ''
 
-  if (validator.isURL(longUrl) !== true) {
+  if (!validator.isURL(longUrl)) {
     console.log('Not a valid Url')
     return res.status(400).send({error: 'not a valid url'})
   }
