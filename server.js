@@ -1,6 +1,6 @@
 'use strict'
 var express = require('express')
-var sanitize = require('mongo-sanitize')
+var sanitize = require('mongo-sanitize') // security
 var helmet = require('helmet')
 var app = express()
 app.use(helmet())
