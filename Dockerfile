@@ -1,10 +1,12 @@
-FROM node:6
+#FROM node:6
+FROM mhart/alpine-node:6
+
 MAINTAINER Edouard Fischer <edouard.fischer@gmail.com>
 
-RUN groupadd -r shortener && useradd -r -g shortener shortener
+#RUN groupadd -r shortener && useradd -r -g shortener shortener
 
 # Create app directory
-RUN mkdir -p /usr/src/app && chown -R shortener:shortener /usr/src/app
+RUN mkdir -p /usr/src/app && chown -R nobody:nogroup /usr/src/app
 WORKDIR /usr/src/app
 
 # Install app dependencies
@@ -14,7 +16,7 @@ RUN npm install --production
 # Bundle app source
 COPY . /usr/src/app
 
-USER shortener
+USER nobody
 
 EXPOSE 8000
 CMD [ "node", "server.js" ]
