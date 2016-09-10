@@ -6,7 +6,8 @@ var counter = require('./counter')
 var urlSchema = new Schema({
   _id: {type: Number, index: true},
   long_url: String,
-  created_at: Date
+  created_at: Date,
+  hits: { type: Number, default: 0 }
 })
 
 urlSchema.pre('save', function (next) {

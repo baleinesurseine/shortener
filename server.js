@@ -81,7 +81,8 @@ app.get('/api/urls', function (req, res) {
     for (var i = 0; i < docs.length; i++) {
       var doc = {
         _id: docs[i]['_id'],
-        long_url: docs[i]['long_url']
+        long_url: docs[i]['long_url'],
+        hits: docs[i]['hits']
       }
       var id = doc['_id']
       doc.shortUrl = config.webhost + base58.encode(id)
@@ -100,7 +101,7 @@ app.get('/:encoded_id', function (req, res) {
       return res.redirect(config.webhost)
     }
     // check if url already exists in database
-    Url.findOne({_id: id}, function (err, doc) {
+    Url.findOneAndUpdate({_id: id}, {$inc: {hits: 1}}, {new: true}, function (err, doc) {
       if (err) {
         return res.status(500).send({ error: 'Something failed!' })
       }
