@@ -1,9 +1,7 @@
-#FROM node:6
 FROM mhart/alpine-node:6
 
 MAINTAINER Edouard Fischer <edouard.fischer@gmail.com>
 
-#RUN groupadd -r shortener && useradd -r -g shortener shortener
 RUN addgroup shortener && adduser -D -H -G shortener shortener
 
 # Create app directory
