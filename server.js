@@ -88,7 +88,7 @@ app.get('/api/urls', function (req, res) {
       doc.shortUrl = config.webhost + base58.encode(id)
       docs[i] = doc
     }
-    return res.send({urls: JSON.stringify(docs, null, 2)})
+    return res.send({urls: docs})
   })
 })
 
