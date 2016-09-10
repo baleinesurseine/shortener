@@ -14,6 +14,11 @@ function encode (num) {
 
 function encodeAsync (num, callback) {
   setImmediate(() => {
+    num = parseInt(num, 10)
+    if (isNaN(num)) {
+      return callback(new Error('encodeAsync first parameter must be a number'), null)
+    }
+    num = +num
     var encoded = ''
     do {
       var remainder = num % base
@@ -37,6 +42,9 @@ function decode (str) {
 
 function decodeAsync (str, callback) {
   setImmediate(() => {
+    if (typeof str !== 'string' && !(str instanceof String)) {
+      return callback(new Error('decodeAsync first parameter must be a string'), null)
+    }
     var decoded = 0
     while (str) {
       var index = alphabet.indexOf(str[0])
